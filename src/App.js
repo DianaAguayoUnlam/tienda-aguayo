@@ -6,23 +6,9 @@ import ItemListContainer from './components/ItemListContainer/ItemListContainer.
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="App-header" sx={{ justifyContent: 'start' }}>
       <NavBar/>
       <ItemListContainer greeting='Bienvenido/a a Plantillas Webs'/>
-      <ItemListContainer greeting='Plantillas originales y atractivas'/>
-
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
