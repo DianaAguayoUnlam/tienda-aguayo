@@ -9,11 +9,9 @@ productos a añadir en el carrito.
 cantidad seleccionada por el usuario.
 
 */
-import { DisabledByDefaultSharp } from '@mui/icons-material';
 import React, {useState} from 'react';
 
 const ItemCount = ({_stock, _initial}) => {
-    
     
     const [stock, setStock] = useState(_stock);
     const [initial, setInital] = useState(_initial);
@@ -51,9 +49,9 @@ const ItemCount = ({_stock, _initial}) => {
 
     return(
         <div>
-            <button id="btnAdd" onClick={onAdd} disabled={disableAdd}> + </button>
-            <p>{initial}</p>
             <button id="btnRemove" onClick={onRemove} disabled={disableRemove}> - </button>
+            <button>{initial}</button>
+            <button id="btnAdd" onClick={onAdd} disabled={disableAdd}> + </button>
         </div>
     );
 };

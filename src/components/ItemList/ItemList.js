@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
 import Item from '../Item/Item';
+import { Link } from 'react-router-dom';
 
 const ItemList = () => {
 	const [users, setUsers] = useState([]);
-
-	console.log(users);
 
 	useEffect(() => {
 		fetch('https://jsonplaceholder.typicode.com/posts')
@@ -18,7 +17,9 @@ const ItemList = () => {
 			{users.map((user) => {
 				return (
 					<div key={user.id}>
-						<Item data={user} />
+						<Link to={`/item/${user.id}`}>
+							<Item data={user} />
+						</Link>
 					</div>
 				);
 			})}

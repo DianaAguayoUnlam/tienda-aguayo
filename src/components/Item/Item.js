@@ -4,6 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
 const Item = ({ data }) => {
+
 	return (
 		<Card style={{ margin: 40 }} sx={{ maxWidth: 345 }}>
 			<CardContent>

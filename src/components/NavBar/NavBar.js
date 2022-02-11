@@ -6,7 +6,12 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import CartWidget  from './CartWidget/CartWidget';
+import CartWidget from '../CartWidget/CartWidget';
+// Importamos Link para agregar navegabilidad
+import { NavLink, Link } from 'react-router-dom';
+
+// CSS
+import './NavBar.css';
 
 const NavBar = () => {
   return (
@@ -22,14 +27,28 @@ const NavBar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            PlantillasWebs
-          </Typography>
-          <Button color="inherit">Landing pages</Button>
-          <Button color="inherit">Corporativas</Button>
-          <Button color="inherit">Portafolios</Button>
-          <Button color="inherit">Login</Button>
+          
+          {/* Marca */}
+          <Link to='/'>
+            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+              PlantillasWebs
+            </Typography>
+          </Link>
+
+          <NavLink to={`/category/${1}`} activeclassname='currentCategory'>
+					  Landings
+				  </NavLink>
+          
+          <NavLink to={`/category/${2}`} activeclassname='currentCategory'>
+            Corporativas
+				  </NavLink>
+
+          <NavLink to={`/category/${3}`} activeclassname='currentCategory'>
+            Portafolios
+				  </NavLink>
+
           <Button color="inherit"> <CartWidget /> </Button>
+
         </Toolbar>
       </AppBar>
     </Box>

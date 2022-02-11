@@ -5,20 +5,25 @@
 import ItemDetail from "../ItemDetail/ItemDetail";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+// Importamos useParams para recibir id por parametro
+import { useParams } from 'react-router-dom';
 
-const ItemDetailContainer = (props) => {
+const ItemDetailContainer = () => {
 
-    const [data, setData] = useState({});
+  let idParam = useParams();
+	let id = idParam.id;
+	console.log("itemDetailContainer", idParam);
 
-    useEffect(() => {
-		axios(
-			'https://api.nasa.gov/planetary/apod?api_key=tdbrx6dXd7hn0saLy3dOO3EUYVoENGCRcXwscve9'
-		).then((res) => setData(res.data));
-	}, []);
+  const [product, setProduct] = useState([]);
+
+	useEffect(() => {
+		axios(`https://jsonplaceholder.typicode.com/posts/${id}`)
+			.then((response) => setProduct(response.data));
+	}, [id]);
     
     return (
     <>
-      <ItemDetail data={data} />
+      <ItemDetail data={product} />
     </>
     );
   };

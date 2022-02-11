@@ -1,25 +1,23 @@
 // componente hijo
 import * as React from 'react';
-
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import ItemCount from "../ItemCount/ItemCount";
 
 const ItemDetail = ({ data }) => {
 	return (
-		<Card sx={{ maxWidth: 345 }} style={{ margin: 40, minWidth: 800 }}>
-			<CardMedia component='img' image={data.hdurl} alt='imagen nasa' />
+		<Card sx={{ maxWidth: 345 }} style={{ margin: 40 }}>
+			
 			<CardContent>
-				<Typography gutterBottom variant='h2' component='div'>
+				<Typography gutterBottom variant='h4' component='div'>
 					{data.title}
 				</Typography>
-				<Typography variant='body2' color='text.secondary'>
-					{data.explanation}
+
+				<CardMedia component='img' image={data.url} alt='imagen producto' />
+
+				<Typography variant='p' color='text.secondary'>
+					{data.title, data.title}
 				</Typography>
-				<Typography variant='h3' color='text.secondary'>
-					{data.copyright}
-				</Typography>
-				<Typography variant='h4' color='text.primary'>
-					{data.date}
-				</Typography>
+				<ItemCount _stock={5} _initial={1}/>
 			</CardContent>
 		</Card>
 	);
