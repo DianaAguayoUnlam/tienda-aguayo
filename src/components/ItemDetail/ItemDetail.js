@@ -4,6 +4,14 @@ import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import ItemCount from "../ItemCount/ItemCount";
 
 const ItemDetail = ({ data }) => {
+
+	//const [onAdd, setOnAdd] = useState();
+
+	const onAdd = (cantidad) => {
+		//setOnAdd(cantidad);
+		console.log(cantidad);
+	}
+
 	return (
 		<Card sx={{ maxWidth: 345 }} style={{ margin: 40 }}>
 			
@@ -17,7 +25,8 @@ const ItemDetail = ({ data }) => {
 				<Typography variant='p' color='text.secondary'>
 					{data.title, data.title}
 				</Typography>
-				<ItemCount _stock={5} _initial={1}/>
+
+				<ItemCount _stock={5} _initial={1} onAdd={onAdd} />
 			</CardContent>
 		</Card>
 	);
