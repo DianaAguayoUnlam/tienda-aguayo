@@ -1,16 +1,16 @@
 // componente hijo
-import * as React from 'react';
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Button } from '@mui/material';
 import ItemCount from "../ItemCount/ItemCount";
+// Context
+import { CartContext } from '../../CartContext';
+import {useState, useContext, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 
 const ItemDetail = ({ data }) => {
 
-	//const [onAdd, setOnAdd] = useState();
+	const {productos, setProductos, saveProduct} = useContext(CartContext);
 
-	const onAdd = (cantidad) => {
-		//setOnAdd(cantidad);
-		console.log(cantidad);
-	}
+	const [cantidad, setCantidad] = useState(1);
 
 	return (
 		<Card sx={{ maxWidth: 345 }} style={{ margin: 40 }}>
@@ -26,7 +26,16 @@ const ItemDetail = ({ data }) => {
 					{data.title, data.title}
 				</Typography>
 
-				<ItemCount _stock={5} _initial={1} onAdd={onAdd} />
+				<ItemCount _stock={5} cantidad={cantidad} setCantidad={setCantidad}/>
+
+				<button onClick={() => saveProduct({data, cantidad})}>
+					Agregar
+				</button>
+				<Link to='/'>
+					<button sx={{ flexGrow: 1 }}>
+					Terminar compra
+					</button>
+				</Link>
 			</CardContent>
 		</Card>
 	);
