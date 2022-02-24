@@ -10,10 +10,16 @@ import CartWidget from '../CartWidget/CartWidget';
 // Importamos Link para agregar navegabilidad
 import { NavLink, Link } from 'react-router-dom';
 
+// Context
+import { CartContext } from '../../CartContext';
+import {useContext} from 'react';
+
 // CSS
 import './NavBar.css';
 
 const NavBar = () => {
+  
+	const {productos} = useContext(CartContext);
   return (
     <Box sx={{ flexGrow: 1, width: 1 }} >
       <AppBar position="static">
@@ -46,7 +52,7 @@ const NavBar = () => {
           <NavLink to={`/category/${3}`} activeclassname='currentCategory'>
             Portafolios
 				  </NavLink>
-
+        {/*(productos.length > 0) &&*/}
           <Link to='/cart'>
             <Button color="inherit"> <CartWidget /> </Button>
           </Link>
