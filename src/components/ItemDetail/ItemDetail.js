@@ -7,9 +7,7 @@ import {useState, useContext, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
 const ItemDetail = ({ data }) => {
-
-	const {productos, setProductos, saveProduct} = useContext(CartContext);
-
+	const {saveProduct} = useContext(CartContext);
 	const [cantidad, setCantidad] = useState(1);
 
 	return (
@@ -17,13 +15,13 @@ const ItemDetail = ({ data }) => {
 			
 			<CardContent>
 				<Typography gutterBottom variant='h4' component='div'>
-					{data.title}
+					{data.name}
 				</Typography>
 
-				<CardMedia component='img' image={data.url} alt='imagen producto' />
+				<CardMedia component='img' image={data.img} alt='imagen producto' />
 
 				<Typography variant='p' color='text.secondary'>
-					{data.title, data.title}
+					${data.price}
 				</Typography>
 
 				<ItemCount _stock={5} cantidad={cantidad} setCantidad={setCantidad}/>

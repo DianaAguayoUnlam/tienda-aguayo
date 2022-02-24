@@ -7,6 +7,7 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import {BrowserRouter as Router , Routes, Route} from 'react-router-dom';
 // 6 - IMPORTAR NUESTRO HOC PROVIDER Y ENVOLVER NUESTRA APP
 import { CartProvider } from './CartContext';
+import Cart from './components/Cart/Cart';
 
 function App() {
   return (
@@ -21,8 +22,8 @@ function App() {
             <Route path='/' element={<ItemListContainer greeting='Bienvenido/a a Plantillas Webs'/>} />
             <Route path='/category/:id' element={<ItemListContainer greeting='Bienvenido/a a Plantillas Webs'/>} />
             <Route path='/item/:id' element={<ItemDetailContainer/>} />
+            <Route path='/cart' element={<Cart/>} />
           </Routes>
-
         </div>
       </Router>
     </CartProvider>
