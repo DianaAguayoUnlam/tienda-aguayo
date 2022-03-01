@@ -4,35 +4,38 @@
 //importar el componente(hijo) ItemDetail dentro de ItemDetailContainer(padre)
 import ItemDetail from "../ItemDetail/ItemDetail";
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 // Importamos useParams para recibir id por parametro
 import { useParams } from 'react-router-dom';
 
-const ItemDetailContainer = () => {
-  
-  // Hardcodeo lista de productos para simular api
-  const productList = [
-    { id: 1, name: 'Landing Page "Beauty"', price: 2000, img: 'https://cdn.pixabay.com/photo/2016/09/21/11/24/carousel-1684591_960_720.png' },
-		{ id: 2, name: 'Diseño corporativo', price: 1500, img: 'https://cdn.pixabay.com/photo/2016/09/21/11/24/carousel-1684591_960_720.png' },
-		{ id: 3, name: 'Portafolio personal', price: 2500, img: 'https://cdn.pixabay.com/photo/2016/09/21/11/24/carousel-1684591_960_720.png' },
-		{ id: 4, name: 'Plantilla Login', price: 700, img: 'https://cdn.pixabay.com/photo/2016/09/21/11/24/carousel-1684591_960_720.png' },
-		{ id: 5, name: 'Plantilla Slider', price: 700, img: 'https://cdn.pixabay.com/photo/2016/09/21/11/24/carousel-1684591_960_720.png' },
-  ];
+// Firebase
+// Importamos la conexión a firebase.
+import {db} from '../../Firebase/FirebaseConfig'
+import {getDoc, doc} from 'firebase/firestore';
 
-  let idParam = useParams();
-	let id = idParam.id;
+const ItemDetailContainer = () => {
+
+  // Obtengo el parametro id mediante destructuring
+  let {id} = useParams();
 
   const [product, setProduct] = useState([]);
-  /*
-	useEffect(() => {
-		axios(`https://jsonplaceholder.typicode.com/posts/${id}`)
-			.then((response) => setProduct(response.data));
-	}, [id]);
-  */
 
-  useEffect(() => {
-    setProduct(productList.filter(p => p.id == id)[0]); // simulo consulta a la api
-  }, [id]); // Se realiza cada vez que cambia el id
+	useEffect(() => {
+		const getTemplates = async () => {
+      // Buscamos el objeto que tenga el id solicitado.
+      const docRef = doc(db, "templates", id);
+      const querySnapshot = await getDoc(docRef); // getDoc para traer un solo objeto.
+
+      /* Tambien podemos realizar la consulta de esta forma:
+      const q = query(collection(db, 'templates'), where(documentId(), "==", id));
+			const querySnapshot = await getDocs(q); 
+      */
+
+      // Creamos un nuevo objeto para agregar el id
+			const template = {...querySnapshot.data(), id: querySnapshot.id}
+			setProduct(template);
+		}
+		getTemplates();
+	}, [id]);
 
     return (
     <>

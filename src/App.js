@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import NavBar from './components/NavBar/NavBar'; 
 import ItemListContainer from './components/ItemListContainer/ItemListContainer.js'; 
@@ -8,6 +7,7 @@ import {BrowserRouter as Router , Routes, Route} from 'react-router-dom';
 // 6 - IMPORTAR NUESTRO HOC PROVIDER Y ENVOLVER NUESTRA APP
 import { CartProvider } from './CartContext';
 import Cart from './components/Cart/Cart';
+import Category from './views/Category/Category';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           </header>
           <Routes>
             <Route path='/' element={<ItemListContainer greeting='Bienvenido/a a Plantillas Webs'/>} />
-            <Route path='/category/:id' element={<ItemListContainer greeting='Bienvenido/a a Plantillas Webs'/>} />
+            <Route path='/category/:id' element={<Category/>} />
             <Route path='/item/:id' element={<ItemDetailContainer/>} />
             <Route path='/cart' element={<Cart/>} />
           </Routes>
