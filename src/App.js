@@ -15,9 +15,7 @@ function App() {
 		<CartProvider>
       <Router>
         <div className="App">
-          <header sx={{ justifyContent: 'start' }}>
-            <NavBar/>
-          </header>
+          <NavBar/>
           <Routes>
             <Route path='/' element={<ItemListContainer greeting='Bienvenido/a a Plantillas Webs'/>} />
             <Route path='/category/:id' element={<Category/>} />

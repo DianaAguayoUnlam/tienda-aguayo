@@ -1,3 +1,12 @@
-.active{
+.active, .text-primary{
     color: aqua !important;
 }
+
+.menuDesktop.active, .cartWidget.active, .menuDesktop:hover, .cartWidget:hover{
+    color: white !important;
+}
+
+header{
+    background-color: #2a2a2a !important;
+}
+

@@ -1,58 +1,126 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+import {AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import CartWidget from '../CartWidget/CartWidget';
 // Importamos Link para agregar navegabilidad
 import { NavLink, Link } from 'react-router-dom';
-
+import CartWidget from '../CartWidget/CartWidget';
 // CSS
 import './NavBar.css';
 
+const pages = ['Landings', 'Corporativas', 'Portafolios'];
+
 const NavBar = () => {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
   return (
-    <Box sx={{ flexGrow: 1, width: 1 }} >
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            className="text-primary"
           >
-            <MenuIcon />
-          </IconButton>
+            <Link to={'/'} style={{textDecoration: "none"}} className="text-primary">
+                MyTemplate
+            </Link>
+          </Typography>
           
-          {/* Marca */}
-          <Link to='/'>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              PlantillasWebs
+          {/* Categorías mobile */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                 <NavLink to={`/category/${page}`} activeclassname='currentCategory'
+                 style={{textDecoration: "none", color: "#000" }}
+                 >
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                 </NavLink>
+              ))}
+            </Menu>
+          </Box>
+
+          {/* Logo mobile */}
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+              
+            >
+              <Link to={'/'} style={{textDecoration: "none"}} className="text-primary">
+                MyTemplate
+              </Link>
             </Typography>
-          </Link>
 
-          <NavLink to={'/category/Landings'} activeclassname='currentCategory'>
-					  Landings
-				  </NavLink>
+          {/* Categorías desktop */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              
+              <NavLink to={`/category/${page}`}
+                className="menuDesktop"
+                activeclassname='currentCategory'
+                style={{textDecoration: "none", color: "#979797" }}>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+              </NavLink>
+            ))}
+          </Box>
           
-          <NavLink to={'/category/Corporativas'} activeclassname='currentCategory'>
-            Corporativas
-				  </NavLink>
+          {/* Carrito */}
+          <Box sx={{ flexGrow: 0 }}>
+              
+                <NavLink to='/cart'
+                sx={{ my: 2, display: 'block' }}
+                style={{textDecoration: "none", color: "#979797" }}
+                className="cartWidget"
+                >
+                  <CartWidget />
+                </NavLink>
+          </Box>
 
-          <NavLink to={'/category/Portafolios'} activeclassname='currentCategory'>
-            Portafolios
-				  </NavLink>
-          <Link to='/cart'>
-            <Button color="inherit"> <CartWidget /> </Button>
-          </Link>
         </Toolbar>
-      </AppBar>
-    </Box>
+      </Container>
+    </AppBar>
   );
-}
-
+};
 export default NavBar;

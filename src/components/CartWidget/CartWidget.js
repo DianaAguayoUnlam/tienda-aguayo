@@ -7,7 +7,7 @@ import {useContext} from 'react';
 const CartWidget = () => {
   const {productos} = useContext(CartContext);
   console.log("CartContext",CartContext);
-  return (<><RoomIcon />{productos.length}</>);
+  return (<><RoomIcon/> <span underline="none" >{productos.length}</span></>);
 };
 
 export default CartWidget;
