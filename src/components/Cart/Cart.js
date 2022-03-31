@@ -16,9 +16,10 @@ const Cart = () => {
   let sumaTotal = 0;
 
   if(cantidadProductos > 0){
-    (cantidadProductos === 1)
-    ? sumaTotal = productos[0].data.price * productos[0].cantidad
-    : sumaTotal = productos.reduce((a, b) => a.data.price * a.cantidad + b.data.price * b.cantidad);  
+      productos.map(
+        (producto) => {
+          sumaTotal = sumaTotal + producto.data.price * producto.cantidad;
+       });
   }
 
   const deleteItem = (idItem) => {
